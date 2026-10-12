@@ -70,7 +70,7 @@
     #stat-band > div { grid-template-columns: 1fr 1fr !important; }
   }
 </style>
-<script src="assets/image-slot.js"></script>
+<script src="./image-slot.js"></script>
 </helmet>
 <div style="font-family: 'Hanken Grotesk', -apple-system, system-ui, sans-serif; color: #1c3242; background: #ffffff; line-height: 1.6; -webkit-font-smoothing: antialiased;">
 
@@ -110,7 +110,7 @@
       </div>
     </div>
     <div style="position: relative; overflow: hidden;">
-      <image-slot id="hero-photo" shape="rect" src="assets/uploads/HERO.png" placeholder="Fotografija ordinacije / pacijenta" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+      <image-slot id="hero-photo" shape="rect" src="uploads/HERO.png" placeholder="Fotografija ordinacije / pacijenta" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
       <div style="position: absolute; inset: 0; background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0) 18%); pointer-events: none;"></div>
     </div>
   </section>
@@ -465,14 +465,14 @@ class Component extends DCLogic {
   }
   svcData() {
     return [
-      { title: "Konzervativna stomatologija", desc: "Očuvanje prirodnih zuba uz pažljivo i savesno lečenje karijesa.", img: "assets/icons/bolesti.png" },
-      { title: "Estetska stomatologija", desc: "Male korekcije koje osmehu vraćaju prirodan sklad i sjaj.", img: "assets/icons/estetska.png" },
-      { title: "Izbeljivanje zuba", desc: "Bezbedno posvetljavanje za par nijansi svetliji, prirodan osmeh.", img: "assets/icons/izbeljivanje.png" },
-      { title: "Dečija stomatologija", desc: "Prvi susret sa stomatologom kroz strpljenje, da mališani zavole kontrole.", img: "assets/icons/decija.png" },
-      { title: "Stomatološka protetika", desc: "Krunice, mostovi i proteze prilagođene svakom pacijentu.", img: "assets/icons/protetika.png" },
-      { title: "Ortodoncija", desc: "Aparatići za pravilan raspored zuba i skladan zagrižaj.", img: "assets/icons/ortodoncija.png" },
-      { title: "Oralna hirurgija", desc: "Vađenja i manji zahvati, uz jasan dogovor pre svakog koraka.", img: "assets/icons/oralna-hirurgija.png" },
-      { title: "Bolesti usta i zuba", desc: "Blagovremeno lečenje karijesa i briga o zdravlju desni.", img: "assets/icons/implantologija.png" }
+      { title: "Konzervativna stomatologija", desc: "Očuvanje prirodnih zuba uz pažljivo i savesno lečenje karijesa.", img: "icons/bolesti.png" },
+      { title: "Estetska stomatologija", desc: "Male korekcije koje osmehu vraćaju prirodan sklad i sjaj.", img: "icons/estetska.png" },
+      { title: "Izbeljivanje zuba", desc: "Bezbedno posvetljavanje za par nijansi svetliji, prirodan osmeh.", img: "icons/izbeljivanje.png" },
+      { title: "Dečija stomatologija", desc: "Prvi susret sa stomatologom kroz strpljenje, da mališani zavole kontrole.", img: "icons/decija.png" },
+      { title: "Stomatološka protetika", desc: "Krunice, mostovi i proteze prilagođene svakom pacijentu.", img: "icons/protetika.png" },
+      { title: "Ortodoncija", desc: "Aparatići za pravilan raspored zuba i skladan zagrižaj.", img: "icons/ortodoncija.png" },
+      { title: "Oralna hirurgija", desc: "Vađenja i manji zahvati, uz jasan dogovor pre svakog koraka.", img: "icons/oralna-hirurgija.png" },
+      { title: "Bolesti usta i zuba", desc: "Blagovremeno lečenje karijesa i briga o zdravlju desni.", img: "icons/implantologija.png" }
     ];
   }
   renderVals() {
@@ -514,10 +514,10 @@ class Component extends DCLogic {
     const frac = this.state.stepFrac || 0;
     const stepIconMask = (img) => ({ position: "relative", zIndex: 1, width: "30px", height: "30px", WebkitMaskImage: "url('" + img + "')", maskImage: "url('" + img + "')", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center", WebkitMaskSize: "contain", maskSize: "contain", transition: "background .35s ease" });
     const rawSteps = [
-      { num: "01", title: "Kontakt", desc: "Javite se telefonom ili putem email-a. Dogovaramo besplatnu konsultaciju u terminu koji vama odgovara.", img: "assets/icons/step-kontakt.png" },
-      { num: "02", title: "Pregled i plan", desc: "Na osnovu pregleda izrađujemo personalizovani plan terapije, sa jasnim trajanjem i troškovima.", img: "assets/icons/step-pregled.png" },
-      { num: "03", title: "Terapija", desc: "Sve radimo pažljivo i bez žurbe, uz pažnju na vašu udobnost tokom celog zahvata.", img: "assets/icons/step-terapija.png" },
-      { num: "04", title: "Kontrola", desc: "Nakon terapije obavljamo završni pregled i dajemo preporuke za održavanje zdravog osmeha.", img: "assets/icons/step-kontrola.png" }
+      { num: "01", title: "Kontakt", desc: "Javite se telefonom ili putem email-a. Dogovaramo besplatnu konsultaciju u terminu koji vama odgovara.", img: "icons/step-kontakt.png" },
+      { num: "02", title: "Pregled i plan", desc: "Na osnovu pregleda izrađujemo personalizovani plan terapije, sa jasnim trajanjem i troškovima.", img: "icons/step-pregled.png" },
+      { num: "03", title: "Terapija", desc: "Sve radimo pažljivo i bez žurbe, uz pažnju na vašu udobnost tokom celog zahvata.", img: "icons/step-terapija.png" },
+      { num: "04", title: "Kontrola", desc: "Nakon terapije obavljamo završni pregled i dajemo preporuke za održavanje zdravog osmeha.", img: "icons/step-kontrola.png" }
     ];
     const N = rawSteps.length;
     const zsteps = rawSteps.map((s, i) => {
