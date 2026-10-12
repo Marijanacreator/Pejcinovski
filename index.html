@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; }
+  a { color: #2f8f85; text-decoration: none; }
+  a:hover { color: #246f67; }
+  ::selection { background: #2f8f85; color: #fff; }
+  img, image-slot { touch-action: pan-y; }
+  #svc-carousel { scrollbar-width: none; -ms-overflow-style: none; }
+  #svc-carousel::-webkit-scrollbar { display: none; }
+  .svc-full-grid { display: none; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .r-svc-arrow { position: absolute; top: 46%; transform: translateY(-50%); z-index: 5; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border: 1px solid #dde7ec; background: #fff; border-radius: 50%; cursor: pointer; color: #1c3242; box-shadow: 0 14px 30px -14px rgba(20,30,40,0.35); transition: background .2s ease, color .2s ease; }
+  .r-svc-arrow:hover { background: #1c3a52; color: #fff; }
+  @media (min-width: 1281px) { .svc-full-grid { display: grid; } .svc-split { display: none; } }
+  .touch-sheen { position: fixed; z-index: 9998; width: 320px; height: 320px; border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%); opacity: 0; transition: opacity .4s ease; mix-blend-mode: screen; background: radial-gradient(circle, rgba(140,190,200,0.35), rgba(28,58,82,0.15) 46%, rgba(28,58,82,0) 72%); }
+  @keyframes clickRipple { 0% { transform: translate(-50%,-50%) scale(0.2); opacity: 0.5; } 100% { transform: translate(-50%,-50%) scale(1); opacity: 0; } }
+  .click-ripple { position: fixed; z-index: 9999; width: 120px; height: 120px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(28,58,82,0.3), rgba(28,58,82,0) 68%); animation: clickRipple .6s cubic-bezier(.22,.61,.36,1) forwards; }
+  #mobile-menu { display: none; }
+  @media (max-width: 900px) {
+    .r-svc-top { grid-template-columns: 1fr !important; }
+    #svc-carousel > div { width: 100% !important; min-width: 0 !important; scroll-snap-align: center !important; }
+    .r-hero { grid-template-columns: 1fr !important; min-height: 0 !important; }
+    .r-hero > div:first-child { padding: 56px 24px 32px !important; max-width: none !important; justify-content: flex-start !important; }
+    .r-hero > div:last-child { height: 320px; width: 100%; }
+    .r-2col { grid-template-columns: 1fr !important; gap: 36px !important; }
+    .r-contact { grid-template-columns: 1fr !important; gap: 34px !important; }
+    .r-contact-card { padding: 34px !important; }
+    .r-formcol { border-left: none !important; padding-left: 0 !important; border-top: 1px solid #dde7ec; padding-top: 30px; }
+    section > div { padding-left: 24px !important; padding-right: 24px !important; }
+    #usluge > div, #zasto > div, #kontakt > div { padding-top: 64px !important; padding-bottom: 64px !important; }
+    #poverenje { padding-top: 64px !important; padding-bottom: 64px !important; }
+    #stat-band > div { padding-top: 44px !important; padding-bottom: 44px !important; grid-template-columns: 1fr 1fr !important; gap: 28px 16px !important; }
+    #stat-band > div > div > div:first-child { font-size: 24px !important; }
+  }
+  @media (max-width: 760px) {
+    .r-desknav { display: none !important; }
+    .r-hamburger { display: inline-flex !important; }
+    header > div:first-child { padding: 12px 18px !important; gap: 12px !important; }
+    header > div:first-child > div { gap: 12px !important; }
+    header a span:first-child { font-size: 17px !important; }
+    header a span:last-child { font-size: 9px !important; }
+    .r-phonebtn { padding: 11px 16px !important; font-size: 13.5px !important; }
+    .r-footer { grid-template-columns: 1fr 1fr !important; gap: 28px 20px !important; }
+    .r-footer > div:first-child { grid-column: 1 / -1 !important; }
+    .r-herostats { gap: 18px !important; justify-content: space-between !important; }
+    .r-contact-form-grid { grid-template-columns: 1fr !important; }
+    h1 { font-size: 42px !important; }
+    h2 { font-size: 30px !important; }
+  }
+  @media (max-width: 480px) {
+    h1 { font-size: 34px !important; }
+    .r-phonenum { display: none !important; }
+    .r-phonebtn { padding: 12px !important; gap: 0 !important; }
+    .r-herostats > div > div:first-child { font-size: 24px !important; }
+    .r-herostats > div > div:last-child { font-size: 11px !important; }
+    .r-contact-card { padding: 22px !important; border-radius: 18px !important; }
+    #stat-band > div { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>
+<script src="assets/image-slot.js"></script>
+</helmet>
+<div style="font-family: 'Hanken Grotesk', -apple-system, system-ui, sans-serif; color: #1c3242; background: #ffffff; line-height: 1.6; -webkit-font-smoothing: antialiased;">
+
+  <!-- ===== HEADER ===== -->
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid #e3ebf0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="#" style="display: flex; flex-direction: column; color: #1c3a52;">
+        <span style="font-weight: 700; font-size: 20px; letter-spacing: 0.06em;">DR PEJČINOSKI</span>
+        <span style="font-weight: 500; font-size: 10.5px; letter-spacing: 0.14em; color: #7c8f99;">STOMATOLOŠKA ORDINACIJA</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 28px;">
+        <nav class="r-desknav" style="display: flex; align-items: center; gap: 28px;">
+          <a href="#usluge" style="color: #4f6472; font-weight: 500; font-size: 14.5px; letter-spacing: 0.02em;" style-hover="color: #1c3a52;">Usluge</a>
+          <a href="#zasto" style="color: #4f6472; font-weight: 500; font-size: 14.5px; letter-spacing: 0.02em;" style-hover="color: #1c3a52;">Zašto mi</a>
+          <a href="#poverenje" style="color: #4f6472; font-weight: 500; font-size: 14.5px; letter-spacing: 0.02em;" style-hover="color: #1c3a52;">Poverenje</a>
+        </nav>
+        <a href="tel:021551089" class="r-phonebtn" onMouseMove="{{ glowMove }}" onMouseLeave="{{ glowLeave }}" style="position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; background: #1c3a52; color: #fff; padding: 12px 22px; border-radius: 10px; font-weight: 600; font-size: 14.5px; letter-spacing: 0.02em;" style-hover="background: #142a3c;"><span data-shine="" style="position: absolute; left: 50%; top: 50%; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.45), rgba(255,255,255,0) 60%); opacity: 0; transform: translate(-50%,-50%); pointer-events: none; transition: opacity .3s;"></span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="position: relative; z-index: 1; flex: none;"><path d="M5 4h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"></path></svg><span class="r-phonenum" style="position: relative; z-index: 1;">021 551-089</span></a>
+        <button type="button" class="r-hamburger" onClick="{{ toggleMenu }}" aria-label="Meni" style="display: none; align-items: center; justify-content: center; width: 46px; height: 46px; border: 1px solid #dde7ec; background: #fff; border-radius: 10px; cursor: pointer; color: #1c3242;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+      </div>
+    </div>
+    <div id="mobile-menu" style="{{ mobileMenuStyle }}">
+      <a href="#usluge" onClick="{{ closeMenu }}" style="display: block; padding: 14px 32px; color: #1c3242; font-weight: 500; font-size: 16px; border-top: 1px solid #e3ebf0;">Usluge</a>
+      <a href="#zasto" onClick="{{ closeMenu }}" style="display: block; padding: 14px 32px; color: #1c3242; font-weight: 500; font-size: 16px; border-top: 1px solid #e3ebf0;">Zašto mi</a>
+      <a href="#poverenje" onClick="{{ closeMenu }}" style="display: block; padding: 14px 32px; color: #1c3242; font-weight: 500; font-size: 16px; border-top: 1px solid #e3ebf0;">Poverenje</a>
+      <a href="#kontakt" onClick="{{ closeMenu }}" style="display: block; padding: 14px 32px; color: #1c3a52; font-weight: 600; font-size: 16px; border-top: 1px solid #e3ebf0;">Zakaži termin</a>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="r-hero" style="position: relative; overflow: hidden; background: #fff; display: grid; grid-template-columns: minmax(0,1fr) 1.15fr; align-items: stretch;">
+    <div style="position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; padding: 72px 56px 72px 112px; max-width: 620px;">
+      <span style="color: #2f8f85; font-weight: 600; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;">Ordinacija Dr Pejčinoski / Novi Sad</span>
+      <h1 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 300; font-size: 50px; line-height: 1.12; letter-spacing: 0.005em; margin: 22px 0 20px; color: #1c3242; text-wrap: balance;">Stomatološka nega zasnovana na <em style="font-style: normal; color: #2f8f85;">tradiciji</em>.</h1>
+      <p style="font-size: 17px; color: #4f6472; margin: 0 0 34px; max-width: 460px; text-wrap: pretty;">U ordinaciji Dr Pejčinoski, na Podbari u Novom Sadu, negujemo stomatološku negu uz lični pristup prilagođen svakom pacijentu - na istoj adresi od 2004. godine.</p>
+      <div>
+        <a href="#kontakt" onMouseMove="{{ glowMove }}" onMouseLeave="{{ glowLeave }}" style="position: relative; overflow: hidden; display: inline-block; background: #1c3a52; color: #fff; padding: 15px 30px; border-radius: 10px; font-weight: 600; font-size: 15px; letter-spacing: 0.02em;" style-hover="background: #142a3c;"><span data-shine="" style="position: absolute; left: 50%; top: 50%; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.45), rgba(255,255,255,0) 60%); opacity: 0; transform: translate(-50%,-50%); pointer-events: none; transition: opacity .3s;"></span><span style="position: relative; z-index: 1;">Zakažite pregled</span></a>
+      </div>
+    </div>
+    <div style="position: relative; overflow: hidden;">
+      <image-slot id="hero-photo" shape="rect" src="assets/uploads/HERO.png" placeholder="Fotografija ordinacije / pacijenta" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+      <div style="position: absolute; inset: 0; background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0) 18%); pointer-events: none;"></div>
+    </div>
+  </section>
+
+  <!-- ===== NAŠE USLUGE ===== -->
+  <section id="usluge" style="background: #fff;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 96px 32px;">
+      <div style="max-width: 640px; margin: 0 auto 52px; text-align: center;">
+        <span style="color: #2f8f85; font-weight: 600; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;">Naše usluge</span>
+        <h2 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; font-size: 40px; line-height: 1.14; margin: 10px 0 0; color: #1c3242; text-wrap: balance;">Sve što vaš osmeh <strong style="font-weight: 600;">može da poželi</strong></h2>
+      </div>
+      <div class="svc-full-grid">
+        <sc-for list="{{ cards }}" as="c" hint-placeholder-count="8">
+          <div onMouseEnter="{{ c.onEnter }}" onMouseLeave="{{ c.onLeave }}" onClick="{{ c.onTap }}" style="{{ c.cardStyle }}">
+            <div style="{{ c.curtainStyle }}"></div>
+            <div style="position: relative; z-index: 2; display: flex; flex-direction: column; flex: 1;">
+              <span style="{{ c.circleStyle }}"><span style="{{ c.circleFillStyle }}"></span><span style="{{ c.iconWrapStyle }}"></span></span>
+              <h3 style="{{ c.titleStyle }}">{{ c.title }}</h3>
+              <p style="{{ c.descStyle }}">{{ c.desc }}</p>
+              <a href="#kontakt" style="{{ c.moreStyle }}">Više <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="svc-split">
+      <div style="padding: 0 6px;">
+        <div id="svc-carousel" style="display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 2px 16px;">
+          <sc-for list="{{ cards }}" as="c" hint-placeholder-count="3">
+            <div style="flex: none; width: calc((100% - 44px) / 3); min-width: 260px; scroll-snap-align: start;">
+              <div onMouseEnter="{{ c.onEnter }}" onMouseLeave="{{ c.onLeave }}" onClick="{{ c.onTap }}" style="{{ c.cardStyle }}">
+                <div style="{{ c.curtainStyle }}"></div>
+                <div style="position: relative; z-index: 2; display: flex; flex-direction: column; flex: 1;">
+                  <span style="{{ c.circleStyle }}"><span style="{{ c.circleFillStyle }}"></span><span style="{{ c.iconWrapStyle }}"></span></span>
+                  <h3 style="{{ c.titleStyle }}">{{ c.title }}</h3>
+                  <p style="{{ c.descStyle }}">{{ c.desc }}</p>
+                  <a href="#kontakt" style="{{ c.moreStyle }}">Više <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 8px;">
+        <button type="button" onClick="{{ scrollSvcLeft }}" aria-label="Prethodno" style="display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border: 1px solid #dde7ec; background: #fff; border-radius: 50%; cursor: pointer; color: #1c3242; box-shadow: 0 14px 30px -16px rgba(20,30,40,0.3); transition: background .2s ease, color .2s ease;" style-hover="background: #1c3a52; color: #fff;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
+        <button type="button" onClick="{{ scrollSvcRight }}" aria-label="Sledeće" style="display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border: 1px solid #dde7ec; background: #fff; border-radius: 50%; cursor: pointer; color: #1c3242; box-shadow: 0 14px 30px -16px rgba(20,30,40,0.3); transition: background .2s ease, color .2s ease;" style-hover="background: #1c3a52; color: #fff;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ZASTO MI + STATISTIKA ===== -->
+  <section id="zasto" style="position: relative; overflow: hidden; background: #fff;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 100px 32px;">
+      <div style="max-width: 760px; margin: 0 auto 56px; text-align: center;">
+        <span style="color: #2f8f85; font-weight: 600; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;">Po čemu se razlikujemo</span>
+        <h2 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; font-size: 40px; line-height: 1.14; margin: 12px 0 0; color: #1c3242; text-wrap: balance;">Ono čemu se pacijenti <strong style="font-weight: 600;">rado vraćaju</strong></h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px;">
+        <sc-for list="{{ features }}" as="f" hint-placeholder-count="3">
+          <div data-reveal="1" style="text-align: center; padding: 12px; transition: transform .5s cubic-bezier(.25,.8,.35,1);" style-hover="transform: translateY(-5px);">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 66px; height: 66px; background: #eef3f6; border-radius: 50%; color: #1c3a52; margin-bottom: 18px;">{{ f.icon }}</span>
+            <h3 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: 19px; margin: 0 0 8px; color: #1c3242;">{{ f.title }}</h3>
+            <p style="font-size: 14.5px; color: #4f6472; margin: 0; line-height: 1.6; text-wrap: pretty;">{{ f.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <!-- Stat band -->
+    <div id="stat-band" style="position: relative; overflow: hidden; background: linear-gradient(120deg, #142a3c 0%, #1c3a52 55%, #2f8f85 100%);">
+      <div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 18% 30%, rgba(255,255,255,0.08) 0 70px, transparent 72px), radial-gradient(circle at 82% 70%, rgba(255,255,255,0.06) 0 90px, transparent 92px);"></div>
+      <div style="position: relative; max-width: 1200px; margin: 0 auto; padding: 64px 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; text-align: center;">
+        <div>
+          <div style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; color: #fff;">{{ statYears }}</div>
+          <div style="font-size: 14px; color: rgba(255,255,255,0.78); margin-top: 8px; letter-spacing: 0.02em;">godina tradicije</div>
+        </div>
+        <div>
+          <div style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; color: #fff;">Besplatno</div>
+          <div style="font-size: 14px; color: rgba(255,255,255,0.78); margin-top: 8px; letter-spacing: 0.02em;">prvi pregled i konsultacija</div>
+        </div>
+        <div>
+          <div style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; color: #fff;">Po zakazivanju</div>
+          <div style="font-size: 14px; color: rgba(255,255,255,0.78); margin-top: 8px; letter-spacing: 0.02em;">jednostavno dogovaranje termina</div>
+        </div>
+        <div>
+          <div style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; color: #fff;">Član komore</div>
+          <div style="font-size: 14px; color: rgba(255,255,255,0.78); margin-top: 8px; letter-spacing: 0.02em;">privatnih doktora stomatologije Srbije</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BEZ STRAHA ===== -->
+  <section style="position: relative; background: #fff;">
+    <div class="r-2col" style="max-width: 1200px; margin: 0 auto; padding: 84px 32px 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: stretch;">
+      <div style="height: 100%; min-height: 360px; border-radius: 16px; overflow: hidden; position: relative; isolation: isolate; box-shadow: 0 30px 60px -42px rgba(20,30,40,0.35);">
+        <image-slot id="fear-photo" shape="rect" placeholder="Fotografija - opušten pristup pacijentu" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+      </div>
+      <div>
+        <span style="color: #2f8f85; font-weight: 600; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;">Bez straha</span>
+        <h2 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; font-size: 38px; line-height: 1.16; margin: 12px 0 20px; color: #1c3242; text-wrap: balance;">Imate <strong style="font-weight: 600;">strah od stomatologa?</strong> Niste sami.</h2>
+        <p style="font-size: 17px; color: #4f6472; margin: 0 0 30px; text-wrap: pretty;">Ako pomisao na stomatološku stolicu izaziva nelagodnost - posvećeni smo radu sa pacijentima koji imaju strah. Vodimo vas kroz svaki korak sa puno pažnje i razumevanja, uz jasan dogovor pre svakog zahvata.</p>
+        <a href="#kontakt" onMouseMove="{{ glowMove }}" onMouseLeave="{{ glowLeave }}" style="position: relative; overflow: hidden; display: inline-block; background: #1c3a52; color: #fff; padding: 15px 30px; border-radius: 10px; font-weight: 600; font-size: 15px; letter-spacing: 0.04em;" style-hover="background: #142a3c;"><span data-shine="" style="position: absolute; left: 50%; top: 50%; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.45), rgba(255,255,255,0) 60%); opacity: 0; transform: translate(-50%,-50%); pointer-events: none; transition: opacity .3s;"></span><span style="position: relative; z-index: 1;">ZAKAŽITE PRVI PREGLED</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== POVERENJE ===== -->
+  <section id="poverenje" style="position: relative; background: #eef3f6; padding: 92px 0; overflow: hidden; border-top: 1px solid #e3ebf0;">
+    <div aria-hidden="true" style="position: absolute; inset: 0; z-index: 0; pointer-events: none;">
+      <svg viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%;"><path d="M-60 250 C 200 60 360 60 560 250 C 760 440 900 440 1120 240 C 1300 80 1420 120 1520 260" fill="none" stroke="#1c3a52" stroke-width="46" stroke-linecap="round" opacity="0.06"></path></svg>
+    </div>
+    <div style="position: relative; z-index: 1; max-width: 720px; margin: 0 auto 56px; text-align: center; padding: 0 32px;">
+      <span style="display: block; color: #2f8f85; font-weight: 600; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;">Naš pristup</span>
+      <h2 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; font-size: 36px; line-height: 1.16; margin: 12px 0 18px; color: #1c3242; text-wrap: balance;">Poverenje koje traje <strong style="font-weight: 600;">generacijama</strong></h2>
+      <p style="font-size: 17px; color: #4f6472; margin: 0; text-wrap: pretty;">Dobra saradnja i preporuke zadovoljnih pacijenata su, još od 2004. godine, temelj poverenja koje negujemo u ordinaciji Dr Pejčinoski. Verujemo da se najbolja stomatologija gradi kroz lični pristup, strpljenje i kontinuitet rada.</p>
+    </div>
+    <div style="position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px;">
+      <sc-for list="{{ trustPoints }}" as="t" hint-placeholder-count="3">
+        <div style="background: #fff; border: 1px solid #dde7ec; border-radius: 16px; padding: 30px 26px; text-align: center;">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 54px; height: 54px; background: #eef3f6; border-radius: 50%; color: #1c3a52; margin-bottom: 16px;">{{ t.icon }}</span>
+          <h3 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: 17px; margin: 0 0 8px; color: #1c3242;">{{ t.title }}</h3>
+          <p style="font-size: 14px; color: #4f6472; margin: 0; line-height: 1.6;">{{ t.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <div style="position: relative; z-index: 1; text-align: center; margin-top: 40px; padding: 0 32px;">
+      <a href="https://www.google.com/maps/search/Dr+Pejčinoski+stomatolog+Novi+Sad" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #dde7ec; color: #1c3242; padding: 13px 24px; border-radius: 999px; font-weight: 600; font-size: 15px; box-shadow: 0 14px 30px -22px rgba(20,30,40,0.3); transition: transform .25s ease, box-shadow .25s ease;" style-hover="transform: translateY(-2px); box-shadow: 0 20px 38px -22px rgba(20,30,40,0.4);"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.76h3.56c2.08-1.92 3.28-4.74 3.28-8.09z"></path><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.56-2.76c-.98.66-2.23 1.06-3.72 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"></path><path fill="#FBBC05" d="M5.84 14.11a6.6 6.6 0 0 1 0-4.22V7.05H2.18a11 11 0 0 0 0 9.9l3.66-2.84z"></path><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1a11 11 0 0 0-9.82 6.05l3.66 2.84C6.71 7.3 9.14 5.38 12 5.38z"></path></svg>Pronađite nas na Google mapi</a>
+    </div>
+  </section>
+
+  <!-- ===== KONTAKT + MAPA ===== -->
+  <section id="kontakt" style="background: #fff;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 92px 32px;">
+      <div class="r-contact-card" style="background: #fff; border: 1px solid #dde7ec; border-radius: 26px; padding: 54px; box-shadow: 0 44px 90px -56px rgba(20,30,40,0.35);">
+      <div class="r-contact" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start;">
+        <div>
+          <span style="color: #2f8f85; font-weight: 600; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;">Kako Vam možemo pomoći</span>
+          <h2 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; font-size: 40px; line-height: 1.12; margin: 10px 0 16px; color: #1c3242;">Zakažite <strong style="font-weight: 600;">konsultaciju</strong></h2>
+          <p style="font-size: 17px; color: #4f6472; margin: 0 0 32px; text-wrap: pretty;">Imate pitanje, želite da zakažete pregled ili dobijete plan terapije? Popunite formu - odgovaramo u najkraćem roku.</p>
+          <div style="display: flex; flex-direction: column; gap: 18px; margin-bottom: 28px;">
+            <div style="display: flex; gap: 14px; align-items: center;">
+              <span style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #1c3a52; border-radius: 50%; color: #fff; flex: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"></path></svg></span>
+              <div><div style="font-size: 13px; color: #7c8f99;">Telefon</div><div style="font-weight: 600; color: #1c3242;">021 551-089 · 064 202-38-13</div></div>
+            </div>
+            <div style="display: flex; gap: 14px; align-items: center;">
+              <span style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #1c3a52; border-radius: 50%; color: #fff; flex: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="4"></rect><path d="m4 7 8 6 8-6"></path></svg></span>
+              <div style="min-width: 0;"><div style="font-size: 13px; color: #7c8f99;">Email</div><div style="font-weight: 600; color: #1c3242;">pejcinoskisanja@gmail.com</div></div>
+            </div>
+            <div style="display: flex; gap: 14px; align-items: center;">
+              <span style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #1c3a52; border-radius: 50%; color: #fff; flex: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"></path><circle cx="12" cy="10" r="2.4"></circle></svg></span>
+              <div><div style="font-size: 13px; color: #7c8f99;">Adresa</div><div style="font-weight: 600; color: #1c3242;">Milovana Glišića 5, Novi Sad (Podbara)</div></div>
+            </div>
+            <div style="display: flex; gap: 14px; align-items: center;">
+              <span style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #1c3a52; border-radius: 50%; color: #fff; flex: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
+              <div><div style="font-size: 13px; color: #7c8f99;">Radno vreme</div><div style="font-weight: 600; color: #1c3242;">Isključivo po prethodnom zakazivanju</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-formcol" style="border-left: 1px solid #dde7ec; padding-left: 48px;">
+          <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align: center; padding: 40px 10px;">
+              <span style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: #eef3f6; border-radius: 50%; color: #1c3a52; margin-bottom: 18px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
+              <h3 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: 26px; margin: 0 0 10px; color: #1c3242;">Hvala na prijavi!</h3>
+              <p style="font-size: 16px; color: #4f6472; margin: 0 0 24px;">Vaš zahtev je poslat. Kontaktiraćemo vas uskoro.</p>
+              <button type="button" onClick="{{ reset }}" style="background: #fff; color: #1c3242; padding: 12px 22px; border-radius: 10px; font-weight: 600; font-size: 15px; border: 1px solid #cfdce3; cursor: pointer; font-family: inherit;">Pošalji novu prijavu</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ onSubmit }}">
+              <div class="r-contact-form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                <div style="position: relative;">
+                  <label style="display: block; font-size: 13.5px; font-weight: 600; color: #3a4b55; margin-bottom: 7px;">Ime</label>
+                  <input type="text" required="" placeholder="Ime" style="width: 100%; padding: 13px 42px 13px 14px; border: 1px solid #cfdce3; border-radius: 10px; font-size: 15px; font-family: inherit; color: #1c3242; outline: none;" style-focus="border-color: #1c3a52;">
+                </div>
+                <div style="position: relative;">
+                  <label style="display: block; font-size: 13.5px; font-weight: 600; color: #3a4b55; margin-bottom: 7px;">Prezime</label>
+                  <input type="text" required="" placeholder="Prezime" style="width: 100%; padding: 13px 42px 13px 14px; border: 1px solid #cfdce3; border-radius: 10px; font-size: 15px; font-family: inherit; color: #1c3242; outline: none;" style-focus="border-color: #1c3a52;">
+                </div>
+              </div>
+              <div class="r-contact-form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                <div style="position: relative;">
+                  <label style="display: block; font-size: 13.5px; font-weight: 600; color: #3a4b55; margin-bottom: 7px;">Telefon</label>
+                  <input type="tel" required="" placeholder="06x xxx xxxx" style="width: 100%; padding: 13px 42px 13px 14px; border: 1px solid #cfdce3; border-radius: 10px; font-size: 15px; font-family: inherit; color: #1c3242; outline: none;" style-focus="border-color: #1c3a52;">
+                </div>
+                <div style="position: relative;">
+                  <label style="display: block; font-size: 13.5px; font-weight: 600; color: #3a4b55; margin-bottom: 7px;">Email</label>
+                  <input type="email" placeholder="vas@email.rs" style="width: 100%; padding: 13px 42px 13px 14px; border: 1px solid #cfdce3; border-radius: 10px; font-size: 15px; font-family: inherit; color: #1c3242; outline: none;" style-focus="border-color: #1c3a52;">
+                </div>
+              </div>
+              <div style="margin-bottom: 16px;">
+                <label style="display: block; font-size: 13.5px; font-weight: 600; color: #3a4b55; margin-bottom: 7px;">Tip upita</label>
+                <select style="width: 100%; padding: 13px 14px; border: 1px solid #cfdce3; border-radius: 10px; font-size: 15px; font-family: inherit; color: #1c3242; outline: none; background: #fff;" style-focus="border-color: #1c3a52;">
+                  <option>Redovni pregled</option>
+                  <option>Stomatološka protetika</option>
+                  <option>Estetska stomatologija</option>
+                  <option>Oralna hirurgija</option>
+                  <option>Konsultacija</option>
+                </select>
+              </div>
+              <div style="margin-bottom: 22px;">
+                <label style="display: block; font-size: 13.5px; font-weight: 600; color: #3a4b55; margin-bottom: 7px;">Poruka (opciono)</label>
+                <textarea rows="3" placeholder="Ukratko o razlogu posete…" style="width: 100%; padding: 13px 14px; border: 1px solid #cfdce3; border-radius: 10px; font-size: 15px; font-family: inherit; color: #1c3242; outline: none; resize: vertical;" style-focus="border-color: #1c3a52;"></textarea>
+              </div>
+              <button type="submit" onMouseMove="{{ glowMove }}" onMouseLeave="{{ glowLeave }}" style="position: relative; overflow: hidden; width: 100%; background: #1c3a52; color: #fff; padding: 15px; border: none; border-radius: 10px; font-weight: 600; font-size: 15px; letter-spacing: 0.05em; cursor: pointer; font-family: inherit;" style-hover="background: #142a3c;"><span data-shine="" style="position: absolute; left: 50%; top: 50%; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.45), rgba(255,255,255,0) 60%); opacity: 0; transform: translate(-50%,-50%); pointer-events: none; transition: opacity .3s;"></span><span style="position: relative; z-index: 1;">POŠALJI ZAHTEV</span></button>
+              <p style="font-size: 12.5px; color: #8fa3ad; text-align: center; margin: 14px 0 0;">Slanjem prihvatate da vas kontaktiramo radi potvrde termina.</p>
+            </form>
+          </sc-if>
+        </div>
+      </div>
+      <div class="r-map" style="border-radius: 16px; overflow: hidden; margin-top: 40px;">
+        <iframe src="https://maps.google.com/maps?q=Milovana%20Gli%C5%A1i%C4%87a%205%2C%20Novi%20Sad&amp;t=m&amp;z=15&amp;output=embed&amp;iwloc=near" style="width: 100%; height: 300px; border: 0; display: block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background: #ffffff; color: #4f6472; border-top: 1px solid #e3ebf0;">
+    <div class="r-footer" style="max-width: 1200px; margin: 0 auto; padding: 60px 32px 30px; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px;">
+      <div>
+        <div style="display: flex; flex-direction: column; color: #1c3a52; margin-bottom: 16px;">
+          <span style="font-weight: 700; font-size: 20px; letter-spacing: 0.06em;">DR PEJČINOSKI</span>
+          <span style="font-weight: 500; font-size: 10.5px; letter-spacing: 0.14em; color: #7c8f99;">STOMATOLOŠKA ORDINACIJA</span>
+        </div>
+        <p style="font-size: 14px; color: #4f6472; margin: 0; max-width: 320px;">Stomatološka ordinacija na Podbari sa višedecenijskom tradicijom - lični pristup, poverenje i kontinuitet od 2004. godine.</p>
+      </div>
+      <div>
+        <h4 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: 15px; color: #1c3242; margin: 0 0 14px; letter-spacing: 0.06em;">NAVIGACIJA</h4>
+        <div style="display: flex; flex-direction: column; gap: 9px; font-size: 14px;">
+          <a href="#usluge" style="color: #4f6472;" style-hover="color: #1c3a52;">Usluge</a>
+          <a href="#zasto" style="color: #4f6472;" style-hover="color: #1c3a52;">Zašto mi</a>
+          <a href="#kontakt" style="color: #4f6472;" style-hover="color: #1c3a52;">Kontakt</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: 15px; color: #1c3242; margin: 0 0 14px; letter-spacing: 0.06em;">KONTAKT</h4>
+        <div style="display: flex; flex-direction: column; gap: 11px; font-size: 14px;">
+          <span style="display: inline-flex; align-items: center; gap: 9px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1c3a52" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: none;"><path d="M5 4h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"></path></svg>021 551-089</span>
+          <span style="display: inline-flex; align-items: center; gap: 9px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1c3a52" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: none;"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="m4 7 8 6 8-6"></path></svg>pejcinoskisanja@gmail.com</span>
+          <span style="display: inline-flex; align-items: center; gap: 9px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1c3a52" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: none;"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"></path><circle cx="12" cy="10" r="2.4"></circle></svg>Milovana Glišića 5, Novi Sad</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top: 1px solid #e3ebf0;">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 20px 32px; font-size: 13px; color: #8fa3ad;">© 2026 Dr Pejčinoski - Stomatološka ordinacija · Sva prava zadržana</div>
+    </div>
+  </footer>
+
+  <!-- ===== LIVE KONTAKT BUBBLE ===== -->
+  <a href="#kontakt" style="position: fixed; left: 24px; bottom: 24px; z-index: 60; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 76px; height: 76px; background: #1c3a52; border-radius: 50%; color: #fff; box-shadow: 0 14px 30px -8px rgba(20,30,40,0.5);" style-hover="background: #142a3c;">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-11.9 7.8L3 21l1.8-6A8.5 8.5 0 1 1 21 11.5Z"></path></svg>
+    <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.04em; margin-top: 2px;">Live</span>
+  </a>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { submitted: false, hoveredSvc: null, statP: 0, mobileMenu: false, svcIdx: 0, stepFrac: 0 };
+  icon(paths, size, sw) {
+    return React.createElement("svg", {
+      width: size || 24, height: size || 24, viewBox: "0 0 24 24", fill: "none",
+      stroke: "currentColor", strokeWidth: sw || 1.5, strokeLinecap: "round", strokeLinejoin: "round"
+    }, paths.map((d, i) => React.createElement(d.tag || "path", { key: i, ...d })));
+  }
+  setupReveal() {
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    if (!els.length) return;
+    els.forEach((el) => { el.style.opacity = '0'; el.style.transform = 'translateY(28px)'; el.style.willChange = 'opacity, transform'; });
+    const seen = new WeakSet();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting || seen.has(e.target)) return;
+        seen.add(e.target);
+        const sibs = Array.from(e.target.parentElement ? e.target.parentElement.querySelectorAll(':scope > [data-reveal]') : [e.target]);
+        const idx = Math.max(0, sibs.indexOf(e.target));
+        const anim = e.target.animate(
+          [{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'translateY(0)' }],
+          { duration: 620, delay: idx * 110, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'forwards' }
+        );
+        anim.onfinish = () => { e.target.style.opacity = '1'; e.target.style.transform = ''; e.target.style.willChange = 'auto'; try { anim.cancel(); } catch (err) {} };
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    els.forEach((el) => io.observe(el));
+    this._revealObserver = io;
+  }
+  componentDidMount() {
+    setTimeout(() => this.setupReveal(), 60);
+    const runCount = () => {
+      if (this._counted) return;
+      this._counted = true;
+      const start = performance.now();
+      const dur = 1400;
+      const tick = (now) => {
+        let t = Math.min(1, (now - start) / dur);
+        const e = 1 - Math.pow(1 - t, 3);
+        this.setState({ statP: e });
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    setTimeout(() => {
+      const band = document.getElementById('stat-band');
+      if (!band) { runCount(); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => { if (en.isIntersecting) { runCount(); io.disconnect(); } });
+      }, { threshold: 0.2 });
+      io.observe(band);
+      this._statObserver = io;
+    }, 60);
+    this._onClickRipple = (e) => {
+      const x = e.clientX, y = e.clientY;
+      if (x == null || y == null) return;
+      const r = document.createElement('div');
+      r.className = 'click-ripple';
+      r.style.left = x + 'px';
+      r.style.top = y + 'px';
+      document.body.appendChild(r);
+      setTimeout(() => r.remove(), 650);
+    };
+    window.addEventListener('pointerdown', this._onClickRipple, { passive: true });
+    const sheen = document.createElement('div');
+    sheen.className = 'touch-sheen';
+    document.body.appendChild(sheen);
+    this._sheen = sheen;
+    let hideT;
+    const moveSheen = (x, y) => { sheen.style.left = x + 'px'; sheen.style.top = y + 'px'; sheen.style.opacity = '1'; clearTimeout(hideT); hideT = setTimeout(() => { sheen.style.opacity = '0'; }, 420); };
+    this._onTouchSheen = (e) => { const t = e.touches && e.touches[0]; if (t) moveSheen(t.clientX, t.clientY); };
+    window.addEventListener('touchstart', this._onTouchSheen, { passive: true });
+    window.addEventListener('touchmove', this._onTouchSheen, { passive: true });
+    this._onStepScroll = () => {
+      const track = document.getElementById('korak-track');
+      if (!track) return;
+      const r = track.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const anchor = vh * 0.58;
+      const frac = (anchor - r.top) / (r.height || 1);
+      const c = Math.max(0, Math.min(1, frac));
+      if (Math.abs((this.state.stepFrac || 0) - c) > 0.004) this.setState({ stepFrac: c });
+    };
+    window.addEventListener('scroll', this._onStepScroll, { passive: true });
+    window.addEventListener('resize', this._onStepScroll, { passive: true });
+    setTimeout(this._onStepScroll, 120);
+  }
+  componentWillUnmount() {
+    if (this._onStepScroll) { window.removeEventListener('scroll', this._onStepScroll); window.removeEventListener('resize', this._onStepScroll); }
+    if (this._onClickRipple) window.removeEventListener('pointerdown', this._onClickRipple);
+    if (this._onTouchSheen) { window.removeEventListener('touchstart', this._onTouchSheen); window.removeEventListener('touchmove', this._onTouchSheen); }
+    if (this._sheen) this._sheen.remove();
+    if (this._revealObserver) this._revealObserver.disconnect();
+  }
+  svcData() {
+    return [
+      { title: "Konzervativna stomatologija", desc: "Očuvanje prirodnih zuba uz pažljivo i savesno lečenje karijesa.", img: "assets/icons/bolesti.png" },
+      { title: "Estetska stomatologija", desc: "Male korekcije koje osmehu vraćaju prirodan sklad i sjaj.", img: "assets/icons/estetska.png" },
+      { title: "Izbeljivanje zuba", desc: "Bezbedno posvetljavanje za par nijansi svetliji, prirodan osmeh.", img: "assets/icons/izbeljivanje.png" },
+      { title: "Dečija stomatologija", desc: "Prvi susret sa stomatologom kroz strpljenje, da mališani zavole kontrole.", img: "assets/icons/decija.png" },
+      { title: "Stomatološka protetika", desc: "Krunice, mostovi i proteze prilagođene svakom pacijentu.", img: "assets/icons/protetika.png" },
+      { title: "Ortodoncija", desc: "Aparatići za pravilan raspored zuba i skladan zagrižaj.", img: "assets/icons/ortodoncija.png" },
+      { title: "Oralna hirurgija", desc: "Vađenja i manji zahvati, uz jasan dogovor pre svakog koraka.", img: "assets/icons/oralna-hirurgija.png" },
+      { title: "Bolesti usta i zuba", desc: "Blagovremeno lečenje karijesa i briga o zdravlju desni.", img: "assets/icons/implantologija.png" }
+    ];
+  }
+  renderVals() {
+    const hov = this.state.hoveredSvc;
+    const dark = "#1c3a52";
+    const styleFor = (i, img) => {
+      const on = hov === i;
+      return {
+        cardStyle: {
+          position: "relative", overflow: "hidden", background: "#fff",
+          border: "1px solid " + (on ? "transparent" : "#e3ebf0"), borderRadius: "18px",
+          padding: "34px 28px 26px", display: "flex", flexDirection: "column",
+          minHeight: "340px", height: "100%", boxSizing: "border-box", cursor: "pointer",
+          transform: on ? "translateY(-8px)" : "translateY(0)",
+          boxShadow: on ? "0 34px 60px -34px rgba(20,24,30,0.45)" : "0 1px 0 rgba(0,0,0,0)",
+          transition: "transform .4s ease, box-shadow .4s ease, border-color .4s ease"
+        },
+        curtainStyle: {
+          position: "absolute", left: 0, right: 0, bottom: 0, zIndex: 1,
+          background: dark, pointerEvents: "none",
+          height: on ? "100%" : "0%",
+          borderRadius: on ? "18px" : "46px 46px 18px 18px",
+          transition: "height .5s cubic-bezier(.4,0,.2,1), border-radius .5s cubic-bezier(.4,0,.2,1)"
+        },
+        circleStyle: { position: "relative", display: "inline-flex", alignItems: "center", justifyContent: "center", width: "78px", height: "78px", borderRadius: "50%", lineHeight: 0, background: "#1c3a52", marginBottom: "22px" },
+        circleFillStyle: { position: "absolute", inset: 0, borderRadius: "50%", background: "#fff", transform: on ? "scale(1.06)" : "scale(0)", transformOrigin: "center", transition: "transform .45s cubic-bezier(.34,1.3,.5,1)" },
+        iconWrapStyle: { position: "relative", zIndex: 1, width: "46px", height: "46px", WebkitMaskImage: "url('" + img + "')", maskImage: "url('" + img + "')", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center", WebkitMaskSize: "contain", maskSize: "contain", background: on ? dark : "#fff", transition: "background .35s ease" },
+        titleStyle: { fontFamily: "'Hanken Grotesk', sans-serif", fontWeight: 600, fontSize: "20px", margin: "0 0 10px", color: on ? "#fff" : "#1c3242", transition: "color .4s ease" },
+        descStyle: { fontSize: "14.5px", lineHeight: 1.6, margin: "0 0 24px", textWrap: "pretty", color: on ? "rgba(255,255,255,0.82)" : "#4f6472", transition: "color .4s ease" },
+        moreStyle: { marginTop: "auto", paddingTop: "18px", borderTop: "1px solid " + (on ? "rgba(255,255,255,0.16)" : "#eef3f6"), display: "inline-flex", alignItems: "center", gap: "7px", alignSelf: "flex-start", color: on ? "#7fc4bb" : "#2f8f85", fontWeight: 600, fontSize: "14.5px", letterSpacing: "0.02em", transition: "color .4s ease, border-color .4s ease" },
+        onEnter: () => this.setState({ hoveredSvc: i }),
+        onLeave: () => this.setState({ hoveredSvc: null }),
+        onTap: () => { const el = document.getElementById('svc-carousel'); if (el && el.children.length) el.scrollBy({ left: el.children[0].offsetWidth + 22, behavior: 'smooth' }); }
+      };
+    };
+    const p = this.state.statP;
+    const fmt = (n) => Math.round(n).toLocaleString("de-DE");
+    const cards = this.svcData().map((u, i) => Object.assign({ title: u.title, desc: u.desc }, styleFor(i, u.img)));
+    const frac = this.state.stepFrac || 0;
+    const stepIconMask = (img) => ({ position: "relative", zIndex: 1, width: "30px", height: "30px", WebkitMaskImage: "url('" + img + "')", maskImage: "url('" + img + "')", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center", WebkitMaskSize: "contain", maskSize: "contain", transition: "background .35s ease" });
+    const rawSteps = [
+      { num: "01", title: "Kontakt", desc: "Javite se telefonom ili putem email-a. Dogovaramo besplatnu konsultaciju u terminu koji vama odgovara.", img: "assets/icons/step-kontakt.png" },
+      { num: "02", title: "Pregled i plan", desc: "Na osnovu pregleda izrađujemo personalizovani plan terapije, sa jasnim trajanjem i troškovima.", img: "assets/icons/step-pregled.png" },
+      { num: "03", title: "Terapija", desc: "Sve radimo pažljivo i bez žurbe, uz pažnju na vašu udobnost tokom celog zahvata.", img: "assets/icons/step-terapija.png" },
+      { num: "04", title: "Kontrola", desc: "Nakon terapije obavljamo završni pregled i dajemo preporuke za održavanje zdravog osmeha.", img: "assets/icons/step-kontrola.png" }
+    ];
+    const N = rawSteps.length;
+    const zsteps = rawSteps.map((s, i) => {
+      const on = frac >= (i + 0.42) / N;
+      return {
+        num: s.num, title: s.title, desc: s.desc,
+        cardStyle: { background: "#fff", borderRadius: "14px", padding: "24px 28px", border: "1px solid " + (on ? "#bcdbd3" : "#e7eef1"), transition: "border-color .45s ease" },
+        circleStyle: { position: "relative", display: "inline-flex", alignItems: "center", justifyContent: "center", width: "60px", height: "60px", borderRadius: "50%", lineHeight: 0, background: "#fff", border: "2px solid " + (on ? "#1c3a52" : "#d7e3e9"), marginBottom: "16px", transition: "border-color .4s ease" },
+        iconWrapStyle: Object.assign(stepIconMask(s.img), { background: on ? "#1c3a52" : "#7d8c94" }),
+        titleStyle: { fontFamily: "'Hanken Grotesk', sans-serif", fontWeight: 600, fontSize: "20px", margin: "0 0 8px", color: on ? "#1c3a52" : "#1c3242", transition: "color .4s ease" },
+        descStyle: { fontSize: "14.5px", lineHeight: 1.6, margin: 0, textWrap: "pretty", color: "#4f6472" },
+        numStyle: { position: "relative", zIndex: 1, display: "block", background: "#eef3f6", padding: "6px 0", fontFamily: "'Hanken Grotesk', sans-serif", fontWeight: 700, fontSize: "22px", lineHeight: 1, letterSpacing: "0.02em", color: on ? "#1c3a52" : "#a9b7bf", transition: "color .4s ease" }
+      };
+    });
+    const lineFillStyle = { position: "absolute", left: 0, top: 0, width: "2px", height: (frac * 100) + "%", background: "#1c3a52", borderRadius: "2px", transition: "height .12s linear" };
+    return {
+      cards,
+      scrollSvcLeft: () => { const el = document.getElementById('svc-carousel'); if (el && el.children.length) el.scrollBy({ left: -(el.children[0].offsetWidth + 22), behavior: 'smooth' }); },
+      scrollSvcRight: () => { const el = document.getElementById('svc-carousel'); if (el && el.children.length) el.scrollBy({ left: (el.children[0].offsetWidth + 22), behavior: 'smooth' }); },
+      toggleMenu: () => this.setState({ mobileMenu: !this.state.mobileMenu }),
+      closeMenu: () => this.setState({ mobileMenu: false }),
+      mobileMenuStyle: "overflow: hidden; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); border-top: 1px solid #e3ebf0; max-height: " + (this.state.mobileMenu ? "320px" : "0px") + "; transition: max-height .35s ease;",
+      submitted: this.state.submitted,
+      notSubmitted: !this.state.submitted,
+      onSubmit: (e) => { e.preventDefault(); this.setState({ submitted: true }); },
+      reset: () => this.setState({ submitted: false }),
+      glowMove: (e) => { const t = e.currentTarget; const r = t.getBoundingClientRect(); const sh = t.querySelector('[data-shine]'); if (sh) { sh.style.left = (e.clientX - r.left) + 'px'; sh.style.top = (e.clientY - r.top) + 'px'; sh.style.opacity = '1'; } },
+      glowLeave: (e) => { const sh = e.currentTarget.querySelector('[data-shine]'); if (sh) sh.style.opacity = '0'; },
+      statYears: fmt(20 * p) + "+",
+      zsteps,
+      lineFillStyle,
+      features: [
+        { title: "Tradicija i kontinuitet", desc: "Na istoj adresi od 2004. godine - dugogodišnje iskustvo koje pacijenti prepoznaju i kojem se vraćaju.",
+          icon: this.icon([{ tag: "circle", cx: 12, cy: 12, r: 9 }, { d: "M12 7v5l3 2" }], 26) },
+        { title: "Lični pristup", desc: "Vreme i pažnja posvećeni svakom pacijentu - objasnimo sve i zajedno nađemo rešenje koje vama odgovara.",
+          icon: this.icon([{ tag: "circle", cx: 12, cy: 12, r: 9 }, { d: "m8 12.5 2.5 2.5L16 9.5" }], 26) },
+        { title: "Preporuke kao poverenje", desc: "Zadovoljstvo pacijenata i njihove preporuke su osnov poverenja koje gradimo iz godine u godinu.",
+          icon: this.icon([{ tag: "circle", cx: 9, cy: 8, r: 3.2 }, { tag: "circle", cx: 17, cy: 9, r: 2.4 }, { d: "M3.5 20a5.5 5.5 0 0 1 11 0" }, { d: "M14.5 20a4.5 4.5 0 0 1 6-4.2" }], 26) }
+      ],
+      trustPoints: [
+        { title: "Tradicija od 2004.", desc: "Kontinuirano na istoj adresi na Podbari, u Novom Sadu.",
+          icon: this.icon([{ tag: "circle", cx: 12, cy: 12, r: 9 }, { d: "M12 7v5l3 2" }], 24) },
+        { title: "Lični pristup", desc: "Svakom pacijentu posvećujemo vreme i pažnju koju zaslužuje.",
+          icon: this.icon([{ d: "M12 21s-7-4.5-9.5-9C1 8.5 3 5 6.5 5 9 5 12 8 12 8s3-3 5.5-3C21 5 23 8.5 21.5 12 19 16.5 12 21 12 21Z" }], 24) },
+        { title: "Preporuke pacijenata", desc: "Najveći deo pacijenata dolazi na preporuku - to nam je najvažnije priznanje.",
+          icon: this.icon([{ tag: "circle", cx: 9, cy: 8, r: 3.2 }, { tag: "circle", cx: 17, cy: 9, r: 2.4 }, { d: "M3.5 20a5.5 5.5 0 0 1 11 0" }, { d: "M14.5 20a4.5 4.5 0 0 1 6-4.2" }], 24) }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
